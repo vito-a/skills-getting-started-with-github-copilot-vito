@@ -8,6 +8,7 @@ for extracurricular activities at Mergington High School.
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
+from pydantic import BaseModel
 import os
 from pathlib import Path
 
@@ -42,14 +43,41 @@ activities = {
 }
 
 
+class ActivityCreate(BaseModel):
+    name: str
+    description: str
+    schedule: str
+    max_participants: int
+
+
 @app.get("/")
 def root():
     return RedirectResponse(url="/static/index.html")
 
 
+@app.get("/admin")
+def admin_redirect():
+    return RedirectResponse(url="/static/admin.html")
+
+
 @app.get("/activities")
 def get_activities():
     return activities
+
+
+@app.post("/activities/add")
+def add_activity(activity: ActivityCreate):
+    """Add a new activity to the program"""
+    if activity.name in activities:
+        raise HTTPException(status_code=400, detail="Activity already exists")
+
+    activities[activity.name] = {
+        "description": activity.description,
+        "schedule": activity.schedule,
+        "max_participants": activity.max_participants,
+        "participants": []
+    }
+    return {"message": f"Added activity {activity.name}"}
 
 
 @app.post("/activities/{activity_name}/signup")

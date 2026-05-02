@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Admin — Mergington High School</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Teacher Admin</h1>
+      <h2>Manage activities and view student signups</h2>
+    </header>
+
+    <main>
+      <section id="admin-overview">
+        <h3>Current Activities</h3>
+        <div id="admin-activities-list">
+          <p>Loading activities...</p>
+        </div>
+      </section>
+
+      <section id="admin-controls">
+        <h3>Add a New Activity</h3>
+        <form id="add-activity-form">
+          <div class="form-group">
+            <label for="activity-name">Activity Name:</label>
+            <input type="text" id="activity-name" required placeholder="e.g. Journalism Club" />
+          </div>
+          <div class="form-group">
+            <label for="activity-description">Description:</label>
+            <input type="text" id="activity-description" required placeholder="A short description" />
+          </div>
+          <div class="form-group">
+            <label for="activity-schedule">Schedule:</label>
+            <input type="text" id="activity-schedule" required placeholder="Weekly on Tuesdays, 4-5pm" />
+          </div>
+          <div class="form-group">
+            <label for="activity-max">Max Participants:</label>
+            <input type="number" id="activity-max" required min="1" value="15" />
+          </div>
+          <button type="submit">Add Activity</button>
+        </form>
+
+        <h3>Add a Student to an Activity</h3>
+        <form id="add-student-form">
+          <div class="form-group">
+            <label for="admin-activity-select">Activity:</label>
+            <select id="admin-activity-select" required>
+              <option value="">-- Select an activity --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="student-email">Student Email:</label>
+            <input type="email" id="student-email" required placeholder="student@mergington.edu" />
+          </div>
+          <button type="submit">Add Student</button>
+        </form>
+
+        <div id="admin-message" class="hidden"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p><a href="index.html">Back to activities</a></p>
+      <p>&copy; 2023 Mergington High School</p>
+    </footer>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

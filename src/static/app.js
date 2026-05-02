@@ -4,6 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
+  // Function to get symbol for activity
+  function getActivitySymbol(name) {
+    const symbols = {
+      "Chess Club": "♟️",
+      "Programming Class": "💻",
+      "Gym Class": "🏃"
+    };
+    return symbols[name] || "📚"; // Default symbol
+  }
+
   // Function to fetch activities from API
   async function fetchActivities() {
     try {
@@ -19,9 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
         activityCard.className = "activity-card";
 
         const spotsLeft = details.max_participants - details.participants.length;
+        const symbol = getActivitySymbol(name);
 
         activityCard.innerHTML = `
-          <h4>${name}</h4>
+          <h4>${symbol} ${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
@@ -32,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add option to select dropdown
         const option = document.createElement("option");
         option.value = name;
-        option.textContent = name;
+        option.textContent = `${symbol} ${name}`;
         activitySelect.appendChild(option);
       });
     } catch (error) {
