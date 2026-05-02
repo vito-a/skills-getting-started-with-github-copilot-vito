@@ -28,6 +28,16 @@ header h1 {
   margin-bottom: 10px;
 }
 
+header a {
+  color: #bbdefb;
+  text-decoration: underline;
+}
+
+header a:hover,
+header a:focus {
+  color: #ffffff;
+}
+
 main {
   display: flex;
   flex-wrap: wrap;
